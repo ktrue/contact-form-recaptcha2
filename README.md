@@ -138,7 +138,7 @@ langlookup|Please double-check carefully.|Please double-check carefully.|
 Select the text in the above code box, right-click, Copy then paste to the end of _language-**LL**.txt_ and change the third field (delimited by **|** ) with the language translation. Make sure the translation is done using the ISO-8859-n character set appropriate to your translation, **and not UTF-8**. Save and upload to your website.
 
 Copy _wxcontact-en.html_ to _wxcontact-**LL**.html_ to make a new boilerplate file for language _**LL.**_ In the new file, the parts to edit are below the _**$main_top_text**_,_ **$welcome_intro**_ and **_$thank_you_** variables. You can use a mix of text, HTML and PHP if you like.  
-If you need to use literal dollar signs ( **$** ), escape them by using ( **\$** ), otherwise you'll have a PHP error.  
+If you need to use literal dollar signs ( **$** ), escape them by using ( **\\$** ), otherwise you'll have a PHP error.  
 Make sure the translation is done using the ISO-8859-n character set appropriate to your translation, **and not UTF-8**.  
 Also be careful to not disturb the end markers for each section.  
 Translate the text as desired for each section, save and upload to your site.  
