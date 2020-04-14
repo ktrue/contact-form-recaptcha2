@@ -1,10 +1,19 @@
+<?php
+# Setting: select captcha method to use:
+$useGoogle = true; // =true; use Google reCaptcha V2, =false; use hCaptcha
+# end Setting
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<!-- standalone contact.php V2.00 - 07-Apr-2018 -->
+<!-- standalone contact.php V3.00 - 14-Apr-2020 -->
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Contact</title>
+<?php if($useGoogle) { ?>
 <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+<?php } else { ?>
+<script src="https://hcaptcha.com/1/api.js"></script>
+<? } // end captcha script choice ?>
 <style type="text/css">
 body {
   color: black;
@@ -77,7 +86,11 @@ p {
   <div id="main-copy">
 <?php 
   $doStandalone = true;
-	include_once("contact-inc.php");
+	if($useGoogle) { 
+	  include_once("contact-inc.php");
+	} else {
+		include_once("contactH-inc.php");
+	}
 ?>
   </div> <!-- end div main-copy -->
 </div> <!-- end div page -->

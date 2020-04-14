@@ -2,7 +2,7 @@
 
 Having a 'safe' way to contact you on your website is a good idea. In 2008, Mike Challis of 642weather.com released a contact page for both standalone and Saratoga templates that used a built-in PHP script to create a captcha that minimized the ability of spambots to post messages. The bad news is that the spambots have caught on to the algorithm/structure of that captcha and so now can freely post spam using the old form/captcha that was released.
 
-This script retools Mike's original form to use the Google reCAPTCHA V2.0 which is very much more resistant to spambot postings. The script comes as a standalone _contact.php/contact-inc.php_ which is English only. The Saratoga template _wxcontact.php/contact-inc.php/wxcontact-**LL**.html_ offers multilingual use in the [Saratoga templates](https://saratoga-weather.org/wxtemplates/index.php) for all supported languages.
+This script retools Mike's original form to use the Google reCAPTCHA V2.0 or hCaptcha which are very much more resistant to spambot postings. The script comes as a standalone _contact.php/contact-inc.php/contactH-inc.php_ which are English only. The Saratoga template _wxcontact.php/contact-inc.php/contactH-inc.php/wxcontact-**LL**.html_ offers multilingual use in the [Saratoga templates](https://saratoga-weather.org/wxtemplates/index.php) for all supported languages.
 
 ## Screen captures of standalone and Saratoga template use
 
@@ -30,9 +30,10 @@ This script retools Mike's original form to use the Google reCAPTCHA V2.0 which 
 
 </table>
 
-## Get a reCAPTCHA Key pair and configure the script
+## Get a CAPTCHA Key pair and configure the script
 
-This script requires a reCAPTCHA SITE and SECRET key pair to operate the Google reCAPTCHA.
+This script requires a CAPTCHA SITE and SECRET key pair to operate:
+For Google reCAPTCHA:
 
 1.  Go to [**https://www.google.com/recaptcha/admin**](https://www.google.com/recaptcha/admin) and sign in to the site.
 2.  Click on 'Register a new site' and fill in the following:
@@ -48,6 +49,22 @@ This script requires a reCAPTCHA SITE and SECRET key pair to operate the Google 
 6.  Complete setup by configuring _**$logFile**_, _**$mailto**_ and **_$sitename_** variables as discussed below.
 7.  Upload your configured contact-inc.php and test it.
 
+For hCaptcha:
+
+1.  Go to [**https://dashboard.hcaptcha.com/signup**](https://dashboard.hcaptcha.com/signup) and create a login ID and sign in to the site.
+2.  Click on New Site' and fill in the following:
+    1.  The Hostname using the site
+    2.  The 'Interest Group' (which determines what type of images will be shown in the captcha)
+    3.  Set the Captcha Difficulty as you wish. I use 'Difficult'.
+    4.  Click on 'Save' and the dashboard should display.
+3.  Click on the 'Settings' for the new key and copy the Site Key to the clipboard.
+4.  Copy the contents of the "Site Key" to **_$recaptchaSiteKey_** variable in _contactH-inc.php_ settings area.
+5.  Click on the 'Settings' tab on the dashboard page to show your Secret Key.
+6.  Copy the contents of the "Secret Key" to _**$recaptchaSecretKey**_ variable in _contactH-inc.php_ settings area.
+7.  Complete setup by configuring _**$logFile**_, _**$mailto**_ and **_$sitename_** variables as discussed below.
+8.  Upload your configured _contactH-inc.php_.
+9.  Change the **$useGoogle = true;** to **$useGoogle = false;** in _contact.php_ and _wxcontact.php_ to enable hCaptcha instead of the default Google reCaptcha
+10.  Upload your configured _contact.php_ and _wxcontact.php_.
 ## Settings
 
 Configure **_contact-inc.php_** with the settings for your website.
@@ -59,12 +76,12 @@ Configure **_contact-inc.php_** with the settings for your website.
 # always configure these options before use
 # always test your contact form after making changes
 #
-# This script REQUIRES a google reCAPTCHA key pair.  Use
+# This script REQUIRES a reCAPTCHA key pair.  Use
 # https://www.google.com/recaptcha/admin to acquire a key pair
 #  insert your Site Key and Site Secret Key in the two variables below
 
- $recaptchaSiteKey =   '-google-site-key-';   // your reCAPTCHA site key
- $recaptchaSecretKey = '-google-secret-key-';   // your reCAPTCHA site secret key
+ $recaptchaSiteKey =   '-google-site-key-';   // your CAPTCHA site key
+ $recaptchaSecretKey = '-google-secret-key-';   // your CAPTCHA site secret key
 
 # Optional log file.  use '' as the name if a log file is not desired.
  $logFile = './contact-log.txt'; // optional text log of messages.  use '' to disable.
@@ -85,11 +102,11 @@ Configure **_contact-inc.php_** with the settings for your website.
 
 <dt>**$recaptchaSiteKey**</dt>
 
-<dd>This variable specifies your Google reCAPTCHA SITE KEY. Copy from the reCAPTCHA admin webpage.</dd>
+<dd>This variable specifies your Google reCAPTCHA or hCaptcha SITE KEY. Copy from the CAPTCHA admin webpage.</dd>
 
 <dt>**$recaptchaSecretKey**</dt>
 
-<dd>This variable specifies your Google reCAPTCHA SECRET KEY. Copy from the reCAPTCHA admin webpage.</dd>
+<dd>This variable specifies your Google reCAPTCHA or hCaptcha SECRET KEY. Copy from the CAPTCHA admin webpage.</dd>
 
 <dt>**$logFile**</dt>
 
