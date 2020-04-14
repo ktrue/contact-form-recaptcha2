@@ -67,7 +67,7 @@ For hCaptcha:
 10.  Upload your configured _contact.php_ and _wxcontact.php_.
 ## Settings
 
-Configure **_contact-inc.php_** with the settings for your website.
+Configure **_contact-inc.php_** or **_contactH-inc.php_** with the settings for your website.
 
 ```php
 ############################################################################
